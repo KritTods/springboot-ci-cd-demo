@@ -1,12 +1,8 @@
 pipeline {
     agent {
-      docker {
-        image 'gradle:8.4.0-jdk17' // หรือเวอร์ชันที่ต้องการ
-      }
-    }
-
-    tools {
-        gradle 'gradle-8'
+        docker {
+            image 'gradle:8.4.0-jdk17'
+        }
     }
 
     environment {
@@ -41,13 +37,17 @@ pipeline {
             }
         }
 
+        // ⛔ ต้องใช้ agent ที่มี docker installed
         stage('Docker Build') {
+            agent any // หรือใช้ node ที่มี docker
             steps {
                 sh 'docker build -t springboot-ci-cd-demo:latest .'
             }
         }
 
+        // ⛔ ต้องใช้ agent ที่มี kubectl
         stage('Deploy to Kubernetes') {
+            agent any
             steps {
                 sh 'kubectl apply -f k8s/deployment.yaml'
             }
