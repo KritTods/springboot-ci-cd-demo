@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube -Dsonar.login=${squ_c73dc04ae997206efb5eed72bfe7e3a218c0d5c4}"
+                    sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"
                 }
             }
         }
