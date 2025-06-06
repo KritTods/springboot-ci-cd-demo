@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+      docker {
+        image 'gradle:8.4.0-jdk17' // หรือเวอร์ชันที่ต้องการ
+      }
+    }
 
     tools {
         gradle 'gradle-8'
