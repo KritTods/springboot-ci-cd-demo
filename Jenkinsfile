@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-user/springboot-ci-cd-demo.git'
+                git 'https://github.com/KritTods/springboot-ci-cd-demo.git'
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"
+                    sh "./gradlew sonarqube -Dsonar.login=${squ_c73dc04ae997206efb5eed72bfe7e3a218c0d5c4}"
                 }
             }
         }
