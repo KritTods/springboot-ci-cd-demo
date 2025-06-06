@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-ci-cd-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-ci-cd-demo
+  template:
+    metadata:
+      labels:
+        app: springboot-ci-cd-demo
+    spec:
+      containers:
+      - name: springboot-ci-cd-demo
+        image: springboot-ci-cd-demo:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
