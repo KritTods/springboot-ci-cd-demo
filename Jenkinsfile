@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'gradle:8.13-jdk17'
+            args '-v $HOME/.gradle:/home/gradle/.gradle' // ช่วย cache gradle downloads
+        }
+    }
 
     environment {
         SONAR_TOKEN = credentials('sonar-token-2')
@@ -29,7 +34,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN}"
+                    sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN} -Dsonar.gradle.skipCompile=true"
                 }
             }
         }
