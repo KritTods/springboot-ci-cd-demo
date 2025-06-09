@@ -42,11 +42,12 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                withDockerRegistry([credentialsId: 'docker-hub-creds']) {
+                withDockerRegistry([credentialsId: 'sonar-token-2', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $IMAGE_NAME"
                 }
             }
         }
+
 
         stage('Deploy to Kubernetes') {
             agent any
