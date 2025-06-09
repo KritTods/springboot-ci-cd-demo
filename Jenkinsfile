@@ -1,13 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'gradle:8.4.0-jdk17'
-        }
-    }
+    agent any
 
     environment {
         SONAR_TOKEN = credentials('sonar-token-2')
         SONAR_URL = 'http://localhost:9000'
+        IMAGE_NAME = 'krittod/springboot-ci-cd-demo:1.0.0'
     }
 
     stages {
@@ -38,16 +35,15 @@ pipeline {
         }
 
         stage('Docker Build') {
-            agent any
-            environment {
-                IMAGE_NAME = 'krittod/springboot-ci-cd-demo:1.0.0'
-            }
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub-creds') {
-                    sh '''
-                        docker build -t $IMAGE_NAME .
-                        docker push $IMAGE_NAME
-                    '''
+                sh "docker build -t $IMAGE_NAME ."
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                withDockerRegistry([credentialsId: 'docker-hub-creds']) {
+                    sh "docker push $IMAGE_NAME"
                 }
             }
         }
