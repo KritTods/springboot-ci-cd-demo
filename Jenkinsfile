@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/KritTods/springboot-ci-cd-demo.git'
+                git branch: 'main', url: 'https://github.com/KritTods/springboot-ci-cd-demo.git'
             }
         }
 
