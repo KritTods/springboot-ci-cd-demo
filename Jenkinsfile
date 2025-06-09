@@ -35,6 +35,9 @@ pipeline {
         }
 
         stage('Docker Build') {
+            agent {
+                    label 'docker-enabled-agent' // ใช้ node ที่มี Docker
+                }
             steps {
                 sh "docker build -t $IMAGE_NAME ."
             }
