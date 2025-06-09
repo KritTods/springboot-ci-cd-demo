@@ -16,6 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
+                sh 'chmod +x gradlew'
                 sh './gradlew clean build'
             }
         }
@@ -47,6 +48,7 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'sonar-token-2', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $IMAGE_NAME"
+                    sh 'docker push krittod/springboot-ci-cd-demo:latest'
                 }
             }
         }
