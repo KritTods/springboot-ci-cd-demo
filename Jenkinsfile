@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONAR_TOKEN = credentials('sonar-token-2')
         SONAR_URL = 'http://localhost:9000'
-        IMAGE_NAME = 'krittod/springboot-ci-cd-demo:1.0.0'
+        IMAGE_NAME = 'todsaponc/springboot-ci-cd-demo:1.0.0'
     }
 
     stages {
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 withDockerRegistry([credentialsId: 'sonar-token-2', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $IMAGE_NAME"
-                    sh 'docker push krittod/springboot-ci-cd-demo:latest'
+                    sh 'docker push todsaponc/springboot-ci-cd-demo:latest'
                 }
             }
         }
