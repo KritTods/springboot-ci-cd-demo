@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        SONAR_TOKEN = credentials('sonar-token')
+        SONAR_TOKEN = credentials('sonar-token-2')
         SONAR_URL = 'http://localhost:9000'
     }
 
