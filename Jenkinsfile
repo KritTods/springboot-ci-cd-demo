@@ -37,15 +37,21 @@ pipeline {
             }
         }
 
-        // ⛔ ต้องใช้ agent ที่มี docker installed
         stage('Docker Build') {
-            agent any // หรือใช้ node ที่มี docker
+            agent any
+            environment {
+                IMAGE_NAME = 'krittod/springboot-ci-cd-demo:1.0.0'
+            }
             steps {
-                sh 'docker build -t springboot-ci-cd-demo:latest .'
+                withDockerRegistry(credentialsId: 'docker-hub-creds') {
+                    sh '''
+                        docker build -t $IMAGE_NAME .
+                        docker push $IMAGE_NAME
+                    '''
+                }
             }
         }
 
-        // ⛔ ต้องใช้ agent ที่มี kubectl
         stage('Deploy to Kubernetes') {
             agent any
             steps {
