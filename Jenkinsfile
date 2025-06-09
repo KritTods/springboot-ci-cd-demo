@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN = credentials('sonar-token-2')
+        SONAR_TOKEN = credentials('sonar-token-id-2')
         SONAR_URL = 'http://localhost:9000'
         IMAGE_NAME = 'todsaponc/springboot-ci-cd-demo:latest'
     }
@@ -31,6 +31,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar-jenkin') {
                     sh "./gradlew sonarqube -Dsonar.login=${SONAR_TOKEN} -Dsonar.gradle.skipCompile=true"
+                    sh './gradlew sonarqube --info --stacktrace -Dsonar.login=${SONAR_TOKEN}'
                 }
             }
         }
@@ -46,7 +47,7 @@ pipeline {
 
         stage('Docker Push') {
             steps {
-                withDockerRegistry([credentialsId: 'sonar-token-2', url: 'https://index.docker.io/v1/']) {
+                withDockerRegistry([credentialsId: 'sonar-token-id-2', url: 'https://index.docker.io/v1/']) {
                     sh "docker push $IMAGE_NAME"
                     sh 'docker push todsaponc/springboot-ci-cd-demo:latest'
                 }

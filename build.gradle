@@ -51,3 +51,12 @@ jacocoTestReport {
         html.required = true
     }
 }
+
+sonar {
+    properties {
+        property "sonar.projectKey", "springboot-ci-cd-demo"
+        property "sonar.projectName", "SpringBoot CI/CD Demo"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", System.getenv("SONAR_TOKEN")
+    }
+}
