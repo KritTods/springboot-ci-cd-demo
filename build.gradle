@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'org.sonarqube' version '4.4.1.3373' // สำหรับ SonarQube plugin (ไม่บังคับถ้าใช้ CLI)
+    id "org.sonarqube" version "6.2.0.5505"
     id 'jacoco'
 }
 
@@ -56,9 +56,10 @@ sonar {
     properties {
         property "sonar.projectKey", "springboot-ci-cd-demo"
         property "sonar.projectName", "SpringBoot CI/CD Demo"
-        property "sonar.host.url", "http://sonarqube:9000"
+        property "sonar.host.url", "http://localhost:9000"
         property "sonar.token", System.getenv("SONAR_TOKEN")
         property "sonar.gradle.skipCompile", "true"
     }
 }
+
 
