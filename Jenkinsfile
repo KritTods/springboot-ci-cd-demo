@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'gradle:8.13-jdk17'
-            args '-v $HOME/.gradle:/home/gradle/.gradle' // ช่วย cache gradle downloads
-        }
-    }
+    agent any
 
     environment {
         SONAR_TOKEN = credentials('sonar-token-2')
