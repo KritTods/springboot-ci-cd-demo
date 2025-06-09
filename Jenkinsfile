@@ -4,7 +4,7 @@ pipeline {
     environment {
         SONAR_TOKEN = credentials('sonar-token-2')
         SONAR_URL = 'http://localhost:9000'
-        IMAGE_NAME = 'todsaponc/springboot-ci-cd-demo:1.0.0'
+        IMAGE_NAME = 'todsaponc/springboot-ci-cd-demo:latest'
     }
 
     stages {
