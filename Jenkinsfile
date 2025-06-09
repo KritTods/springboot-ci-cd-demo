@@ -30,7 +30,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-jenkin') {
-                    sh './gradlew sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.gradle.skipCompile=true'
+                    sh './gradlew sonar -Dsonar.token=$SONAR_TOKEN -Dsonar.gradle.skipCompile=true'
                 }
             }
         }
