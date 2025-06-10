@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONAR_TOKEN = credentials('sonar-token-id-2')
-        SONAR_URL = 'http://localhost:9000'
+//         SONAR_URL = 'http://localhost:9000'
         IMAGE_NAME = 'todsaponc/springboot-ci-cd-demo:latest'
     }
 
@@ -30,7 +30,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-jenkin') {
-                    sh "./gradlew sonar -Dsonar.token=${SONAR_TOKEN} -Dsonar.host.url=${SONAR_URL}"
+                    sh "./gradlew sonar -Dsonar.token=${SONAR_TOKEN}"
                 }
             }
         }
